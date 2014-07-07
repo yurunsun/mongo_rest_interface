@@ -1,0 +1,54 @@
+<html>
+<head>
+	<script type="text/javascript" src="jquery-1.10.1.min.js"></script>
+	<script type="text/javascript" >
+	var __ROOT = "http://192.168.31.168/mongo_php/index.php/";
+	
+	function log_debug(msg) {
+		console.log(msg);
+		$("#output").html(msg);
+	}
+
+	function onTest1() {
+		log_debug("onTest1");
+		var url = __ROOT + "test/foo";
+		$.get(url, function(data) {
+			log_debug(JSON.stringify(data));
+		}).fail(function(){alert("test 1 failed");});
+	}
+	
+	function onTest2() {
+		log_debug("onTest2");
+		var url = __ROOT + "test/foo";
+		
+		var addrData = {"city":"shanghai", "post":200233};
+		$.post(url, {name: "yurun", address: addrData, "phone": [13045678175, 18675832593]}, function(data) {
+			log_debug(JSON.stringify(data));
+		}).fail(function(){alert("test 1 failed");});
+	}
+	
+	function onTest3() {
+		alert("delete not tested yet!");
+	}
+	
+	
+	$(document).ready(function() {
+		$("#test1").click(onTest1);
+		$("#test2").click(onTest2);
+		$("#test3").click(onTest2);
+
+	});
+	</script>
+</head>
+
+<body>
+	<button id="test1">Get DB Collection</button>
+	<button id="test2">Post DB Collection</button>
+	<button id="test3">Delete DB Collection ID</button>
+
+	<div>
+		<p id="output"></p>
+	</div>
+</body>
+
+</html>
